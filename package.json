@@ -1,8 +1,8 @@
 {
   "name": "myflix-client",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "React is used to build the server-side component of a “movies” web application, working with parcel. The web application will give users access to information about different movies, directors, and genres.",
+  "default": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +21,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.0-rc.0"
+    "@parcel/transformer-sass": "^2.6.2",
+    "process": "^0.11.10"
   }
 }
