@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "React is used to build the server-side component of a “movies” web application, working with parcel. The web application will give users access to information about different movies, directors, and genres.",
   "default": "src/index.html",
+
+  "enabledApiProposals": [],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src -d lib"
@@ -32,5 +34,10 @@
     "@parcel/transformer-sass": "^2.6.2",
     "buffer": "^6.0.3",
     "process": "^0.11.10"
-  }
+  },
+
+  "alias": { 
+    "process": false 
+    }
+  
 }
