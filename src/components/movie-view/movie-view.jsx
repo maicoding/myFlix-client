@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export class MovieView extends React.Component {
 
@@ -15,9 +16,7 @@ export class MovieView extends React.Component {
 
     return (
       <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} />
-        </div>
+        
         <div className="movie-title">
           <span className="label">Title: </span>
           <span className="value">{movie.title}</span>
@@ -40,3 +39,18 @@ export class MovieView extends React.Component {
     );
   }
 }
+
+MovieView.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    Description: PropTypes.string.isRequired,
+    genres: PropTypes.shape({
+      Name: PropTypes.string,
+    }),
+    directors: PropTypes.shape({
+      Name: PropTypes.string,
+    }),
+  }).isRequired,
+
+  onBackClick: PropTypes.func.isRequired,
+};

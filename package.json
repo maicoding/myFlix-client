@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "React is used to build the server-side component of a “movies” web application, working with parcel. The web application will give users access to information about different movies, directors, and genres.",
   "default": "src/index.html",
-
   "enabledApiProposals": [],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -21,6 +20,7 @@
   "homepage": "https://github.com/maicoding/myFlix-client#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
@@ -35,9 +35,7 @@
     "buffer": "^6.0.3",
     "process": "^0.11.10"
   },
-
-  "alias": { 
-    "process": false 
-    }
-  
+  "alias": {
+    "process": false
+  }
 }
