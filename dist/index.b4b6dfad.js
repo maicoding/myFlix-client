@@ -26971,15 +26971,15 @@ class MainView extends (0, _reactDefault.default).Component {
             onLoggedIn: (user)=>this.onLoggedIn(user)
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 46,
-            columnNumber: 23
+            lineNumber: 48,
+            columnNumber: 14
         }, this);
         // Before the movies have been loaded
         if (movies.length === 0) return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             className: "main-view"
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 49,
+            lineNumber: 51,
             columnNumber: 37
         }, this);
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
@@ -26991,8 +26991,8 @@ class MainView extends (0, _reactDefault.default).Component {
                 }
             }, void 0, false, {
                 fileName: "src/components/main-view/main-view.jsx",
-                lineNumber: 55,
-                columnNumber: 13
+                lineNumber: 57,
+                columnNumber: 11
             }, this) : movies.map((movie)=>/*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _movieCard.MovieCard), {
                     movie: movie,
                     onMovieClick: (newSelectedMovie)=>{
@@ -27000,12 +27000,12 @@ class MainView extends (0, _reactDefault.default).Component {
                     }
                 }, movie._id, false, {
                     fileName: "src/components/main-view/main-view.jsx",
-                    lineNumber: 57,
+                    lineNumber: 65,
                     columnNumber: 13
                 }, this))
         }, void 0, false, {
             fileName: "src/components/main-view/main-view.jsx",
-            lineNumber: 52,
+            lineNumber: 54,
             columnNumber: 7
         }, this);
     }
@@ -27038,10 +27038,14 @@ class MovieCard extends (0, _reactDefault.default).Component {
         return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
             onClick: ()=>onMovieClick(movie),
             className: "movie-card",
-            children: movie.title
-        }, void 0, false, {
+            children: [
+                " ",
+                movie.title,
+                " "
+            ]
+        }, void 0, true, {
             fileName: "src/components/movie-card/movie-card.jsx",
-            lineNumber: 9,
+            lineNumber: 7,
             columnNumber: 7
         }, this);
     }
@@ -31435,64 +31439,83 @@ function LoginView(props) {
     };
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
         children: [
+            " ",
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                 children: [
+                    " ",
                     "Username:",
+                    " ",
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         type: "text",
                         value: username,
                         onChange: (e)=>setUsername(e.target.value)
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 23,
+                        lineNumber: 21,
                         columnNumber: 9
-                    }, this)
+                    }, this),
+                    " "
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 21,
+                lineNumber: 18,
                 columnNumber: 7
             }, this),
+            " ",
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
                 children: [
+                    " ",
                     "Password:",
+                    " ",
                     /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
                         type: "password",
                         value: password,
                         onChange: (e)=>setPassword(e.target.value)
                     }, void 0, false, {
                         fileName: "src/components/login-view/login-view.jsx",
-                        lineNumber: 31,
+                        lineNumber: 30,
                         columnNumber: 9
-                    }, this)
+                    }, this),
+                    " "
                 ]
             }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 29,
+                lineNumber: 27,
                 columnNumber: 7
             }, this),
+            " ",
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 type: "submit",
                 onClick: handleSubmit,
-                children: "Submit"
-            }, void 0, false, {
+                children: [
+                    " ",
+                    "Submit",
+                    " "
+                ]
+            }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
-                lineNumber: 37,
+                lineNumber: 36,
                 columnNumber: 7
             }, this),
+            " ",
             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
                 type: "submit",
                 onClick: handleRegister,
-                children: "Register Here"
-            }, void 0, false, {
+                children: [
+                    " ",
+                    "Register Here",
+                    " "
+                ]
+            }, void 0, true, {
                 fileName: "src/components/login-view/login-view.jsx",
                 lineNumber: 40,
                 columnNumber: 7
-            }, this)
+            }, this),
+            " "
         ]
     }, void 0, true, {
         fileName: "src/components/login-view/login-view.jsx",
-        lineNumber: 20,
+        lineNumber: 16,
         columnNumber: 5
     }, this);
 }
