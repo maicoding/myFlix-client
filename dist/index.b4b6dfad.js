@@ -28166,6 +28166,19 @@ class MovieView extends (0, _reactDefault.default).Component {
                     fileName: "src/components/movie-view/movie-view.jsx",
                     lineNumber: 42,
                     columnNumber: 9
+                }, this),
+                /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
+                    children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
+                        children: "Back"
+                    }, void 0, false, {
+                        fileName: "src/components/movie-view/movie-view.jsx",
+                        lineNumber: 47,
+                        columnNumber: 11
+                    }, this)
+                }, void 0, false, {
+                    fileName: "src/components/movie-view/movie-view.jsx",
+                    lineNumber: 46,
+                    columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {

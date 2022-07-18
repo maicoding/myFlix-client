@@ -43,6 +43,9 @@ export class MovieView extends React.Component {
           <span className="label">Birth: </span>
           <span className="value">{movie.directors.Birth}</span>
         </div>
+        <div>
+          <button>Back</button>
+        </div>
       </div>
     );
   }
