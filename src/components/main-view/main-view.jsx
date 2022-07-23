@@ -63,7 +63,7 @@ export default class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view" />;
 
     return (
-      <Container>
+      <Container className="mainViewContainer">
         <Nav
           activeKey="/home"
           onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
@@ -90,7 +90,7 @@ export default class MainView extends React.Component {
           {/*If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/}
           {selectedMovie ? (
             <Row className="justify-content-md-center">
-              <Col md={8}>
+              <Col sm={8}>
                 <MovieView
                   movie={selectedMovie}
                   onBackClick={(newSelectedMovie) => {
@@ -100,15 +100,19 @@ export default class MainView extends React.Component {
               </Col>
             </Row>
           ) : (
-            movies.map((movie) => (
-              <MovieCard
-                key={movie._id}
-                movie={movie}
-                onMovieClick={(newSelectedMovie) => {
-                  this.setSelectedMovie(newSelectedMovie);
-                }}
-              />
-            ))
+            <Row className="justify-content-md-center">
+              {movies.map((movie) => (
+                <Col Col lg={3} md={4} sm={6} className="g-4">
+                  <MovieCard
+                    key={movie._id}
+                    movie={movie}
+                    onMovieClick={(newSelectedMovie) => {
+                      this.setSelectedMovie(newSelectedMovie);
+                    }}
+                  />
+                </Col>
+              ))}
+            </Row>
           )}
         </div>
       </Container>

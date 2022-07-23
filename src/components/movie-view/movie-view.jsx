@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import {
-  Button,
   Container,
   Col,
   Row,
@@ -9,7 +8,6 @@ import {
   CardGroup,
   Nav,
   Navbar,
-  Button,
 } from "react-bootstrap";
 
 export class MovieView extends React.Component {
@@ -23,31 +21,8 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
-
     return (
       <Container>
-        <Nav
-          activeKey="/home"
-          onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-        >
-          <Navbar>
-            <Nav.Item>
-              <Nav.Link href="/home">Home</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="/Login">Login</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="My Profile">My Profile</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="Registration">Registration</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="Logout">Logout</Nav.Link>
-            </Nav.Item>
-          </Navbar>
-        </Nav>
         <Row className="justify-content-md-center">
           <Col md={8}>
             <CardGroup>
@@ -86,13 +61,13 @@ export class MovieView extends React.Component {
                       <span className="label">Birth: </span>
                       <span className="value">{movie.directors.Birth}</span>
                     </div>
-                    <Button
-                      variant="primary"
-                      type="submit"
-                      onClick={handleSubmit}
+                    <button
+                      onClick={() => {
+                        onBackClick(null);
+                      }}
                     >
                       Back
-                    </Button>
+                    </button>
                   </div>
                 </Card.Body>
               </Card>
