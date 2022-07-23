@@ -12,7 +12,7 @@ export class MovieCard extends React.Component {
     return (
       <Row className="main-view justify-content-md-center">
         <Col md={8}>
-          <Card>
+          <Card style={{ width: "14rem" }}>
             <Card.Img variant="top" src={movie.ImagePath} />
             <Card.Body>
               <Card.Title>{movie.title}</Card.Title>
