@@ -63,7 +63,7 @@ export default class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view" />;
 
     return (
-      <Container className="mainViewContainer">
+      <Container className="mainViewContainer" key="movies">
         <Nav
           activeKey="/home"
           onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}

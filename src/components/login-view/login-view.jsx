@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import {
-  Form,
-  Button,
-  Container,
-  Col,
-  Row,
-  Card,
-  CardGroup,
-  Nav,
-  Navbar,
-} from "react-bootstrap";
+import { Form, Button, Container, Nav, Navbar } from "react-bootstrap";
 
 import "./login-view.scss";
 export function LoginView(props) {
@@ -38,9 +28,6 @@ export function LoginView(props) {
             <Nav.Link eventKey="/Login">Login</Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="My Profile">My Profile</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
             <Nav.Link eventKey="Registration">Registration</Nav.Link>
           </Nav.Item>
           <Nav.Item>
@@ -48,46 +35,34 @@ export function LoginView(props) {
           </Nav.Item>
         </Navbar>
       </Nav>
-      <Row className="justify-content-md-center">
-        <Col md={8}>
-          <CardGroup>
-            <Card>
-              <Card.Body>
-                <Card.Title>Login</Card.Title>
-                <Form>
-                  <Form.Group controlId="formUsername">
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                      placeholder="Enter a user name"
-                    />
-                  </Form.Group>
+      <label>
+        <h2>Login</h2>
+      </label>
+      <Form>
+        <Form.Group controlId="formUsername">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control
+            type="text"
+            onChange={(e) => setUsername(e.target.value)}
+            required
+            placeholder="Enter a user name"
+          />
+        </Form.Group>
 
-                  <Form.Group controlId="formPassword">
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      type="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      placeholder="Your password has to be at least 8 characters long"
-                      minLength="8"
-                    />
-                  </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </CardGroup>
-        </Col>
-      </Row>
+        <Form.Group controlId="formPassword">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            placeholder="Your password has to be at least 8 characters long"
+            minLength="8"
+          />
+        </Form.Group>
+        <Button variant="primary" type="submit" onClick={handleSubmit}>
+          Submit
+        </Button>
+      </Form>
     </Container>
   );
 }
