@@ -13,10 +13,15 @@ export class MovieCard extends React.Component {
       <Row className="main-view justify-content-md-center">
         <Col md={8}>
           <Card style={{ width: "14rem" }}>
-            <Card.Img variant="top" src={movie.ImagePath} />
+            <Card.Img
+              style={{ width: "14rem", height: "18rem" }}
+              fluid
+              variant="top"
+              src={movie.ImagePath}
+            />
             <Card.Body>
               <Card.Title>{movie.title}</Card.Title>
-              <Card.Text>{movie.Description}</Card.Text>
+              <Card.Text>{movie.genres.Name}</Card.Text>
               <Button onClick={() => onMovieClick(movie)} variant="link">
                 Open
               </Button>

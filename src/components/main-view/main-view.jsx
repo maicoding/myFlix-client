@@ -15,6 +15,7 @@ import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { Container } from "react-bootstrap";
+import { Menu } from "../navbar/navbar";
 
 export default class MainView extends React.Component {
   constructor() {
@@ -63,29 +64,7 @@ export default class MainView extends React.Component {
     if (movies.length === 0) return <div className="main-view" />;
 
     return (
-      <Container className="mainViewContainer">
-        <Nav
-          activeKey="/home"
-          onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-        >
-          <Navbar>
-            <Nav.Item>
-              <Nav.Link href="/home">Home</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="/Login">Login</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="My Profile">My Profile</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="/Registraion">Registration</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="Logout">Logout</Nav.Link>
-            </Nav.Item>
-          </Navbar>
-        </Nav>
+      <Container className="mainViewContainer" key="movie">
         <div className="main-view">
           {/*If the state of `selectedMovie` is not null, that selected movie will be returned otherwise, all *movies will be returned*/}
           {selectedMovie ? (

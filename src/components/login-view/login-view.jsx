@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import { Menu } from "../navbar/navbar.jsx";
 import {
   Form,
   Button,
@@ -26,28 +27,13 @@ export function LoginView(props) {
 
   return (
     <Container>
-      <Nav
-        activeKey="/home"
-        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
-      >
-        <Navbar>
+      <Navbar navbar navbar-expand navbar-light>
+        <Container>
           <Nav.Item>
-            <Nav.Link href="/home">Home</Nav.Link>
+            <Nav.Link eventKey="/Registraion">Registration</Nav.Link>
           </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="/Login">Login</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="My Profile">My Profile</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="Registration">Registration</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="Logout">Logout</Nav.Link>
-          </Nav.Item>
-        </Navbar>
-      </Nav>
+        </Container>
+      </Navbar>
       <Row className="justify-content-md-center">
         <Col md={8}>
           <CardGroup>

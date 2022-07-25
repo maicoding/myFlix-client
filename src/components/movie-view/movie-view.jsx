@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Menu } from "../navbar/navbar.jsx";
 import {
   Container,
   Col,
