@@ -2,37 +2,32 @@ import React from "react";
 import PropTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
+
+import { Link } from "react-router-dom";
 
 export class MovieCard extends React.Component {
   render() {
-    const { movie, onMovieClick } = this.props;
+    const { movie } = this.props;
 
     return (
-      <Row className="main-view justify-content-md-center">
-        <Col md={8}>
-          <Card style={{ width: "14rem" }}>
-            <Card.Img
-              style={{ width: "14rem", height: "18rem" }}
-              fluid
-              variant="top"
-              src={movie.ImagePath}
-            />
-            <Card.Body>
-              <Card.Title>{movie.Title}</Card.Title>
-              <Card.Text>{movie.genres.Name}</Card.Text>
-              <Button
-                onClick={() => onMovieClick(movie)}
-                variant="link"
-                className="btn btn-outline-primary btn"
-              >
-                Open
-              </Button>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <Card style={{ width: "14rem" }}>
+        <Card.Img
+          style={{ width: "14rem", height: "18rem" }}
+          fluid
+          variant="top"
+          src={movie.ImagePath}
+        />
+        <Card.Body>
+          <Card.Title className="title-style">{movie.Title}</Card.Title>
+          <Card.Text>{movie.genres.Name}</Card.Text>
+
+          <Link to={`/movies/${movie._id}`}>
+            <Button className="button-style" variant="primary">
+              Open
+            </Button>
+          </Link>
+        </Card.Body>
+      </Card>
     );
   }
 }
@@ -51,6 +46,5 @@ MovieCard.propTypes = {
       Birth: PropTypes.string.isRequired,
       Death: PropTypes.string,
     }),
-  }).isRequired,
-  onMovieClick: PropTypes.func.isRequired,
+  }),
 };

@@ -6,8 +6,8 @@ import {
   Row,
   Card,
   CardGroup,
-  Nav,
-  Navbar,
+  Link,
+  Button,
 } from "react-bootstrap";
 
 export class MovieView extends React.Component {
@@ -20,7 +20,7 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, directors, onBackClick } = this.props;
     return (
       <Container>
         <Row className="justify-content-md-center">
@@ -60,6 +60,9 @@ export class MovieView extends React.Component {
                     <div className="movie-director">
                       <span className="label">Birth: </span>
                       <span className="value">{movie.directors.Birth}</span>
+                      <Link to={`/directors/${movie.directors.Name}`}>
+                        <Button variant="link">Director</Button>
+                      </Link>
                     </div>
                     <button
                       onClick={() => {

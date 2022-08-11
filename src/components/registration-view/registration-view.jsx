@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import PropTypes from "prop-types";
+import axios from "axios";
 import {
   Form,
   Button,
@@ -17,11 +19,72 @@ export function RegistrationView(props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  // Declare hook for each input error message (when invalid)
+  const [values, setValues] = useState({
+    usernameErr: "",
+    passwordErr: "",
+    emailErr: "",
+    birthdayErr: "",
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(username, password, email, birthday);
-    props.onRegister(false);
+  const validate = () => {
+    let isReq = true;
+    setValues((prev) => {
+      return {
+        usernameErr: "",
+        passwordErr: "",
+        emailErr: "",
+        birthdayErr: "",
+      };
+    });
+    if (!username) {
+      // setValues re-defines values through a callback that receives
+      // the previous state of values & must return values updated
+      setValues((prevValues) => {
+        return { ...prevValues, usernameErr: "Username is required." };
+      });
+      isReq = false;
+    } else if (username.length < 5) {
+      setValues((prevValues) => {
+        return {
+          ...prevValues,
+          usernameErr: "Username must be at least 5 characters long.",
+        };
+      });
+    }
+    if (!password) {
+      setValues((prevValues) => {
+        return { ...prevValues, passwordErr: "Password is required." };
+      });
+      isReq = false;
+    } else if (password.length < 6) {
+      setValues((prevValues) => {
+        return {
+          ...prevValues,
+          passwordErr: "Password must be at least 6 characters long.",
+        };
+      });
+      isReq = false;
+    }
+    if (!email) {
+      setValues({
+        ...values,
+        emailErr: "Email is required.",
+      });
+      isReq = false;
+    } else if (email.indexOf("@") === -1) {
+      setValues((prevValues) => {
+        return { ...prevValues, emailErr: "Enter a valid email address." };
+      });
+      isReg = false;
+    }
+    if (!birthday) {
+      setValues((prevValues) => {
+        return { ...prevValues, birthdayErr: "Enter a valid date." };
+      });
+      isReq = false;
+    }
+    return isReq;
   };
 
   return (
