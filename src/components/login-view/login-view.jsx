@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Menu } from "../navbar/navbar.jsx";
+
 import {
   Form,
   Button,
@@ -27,13 +27,6 @@ export function LoginView(props) {
 
   return (
     <Container>
-      <Navbar navbar navbar-expand navbar-light>
-        <Container>
-          <Nav.Item>
-            <Nav.Link eventKey="/Registraion">Registration</Nav.Link>
-          </Nav.Item>
-        </Container>
-      </Navbar>
       <Row className="justify-content-md-center">
         <Col md={8}>
           <CardGroup>

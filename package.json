@@ -20,6 +20,7 @@
   "homepage": "https://github.com/maicoding/myFlix-client#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "parcel-bundler": "^1.12.5",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
@@ -32,10 +33,12 @@
     "@babel/parser": "^7.18.8",
     "@babel/preset-env": "^7.18.9",
     "@babel/traverse": "^7.18.8",
-    "@parcel/transformer-sass": "^2.6.2",
+    "@parcel/reporter-dev-server": "^2.7.0",
+    "@parcel/transformer-sass": "^2.7.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "buffer": "^6.0.3",
+    "parcel": "^2.7.0",
     "process": "^0.11.10"
   },
   "alias": {
