@@ -1,40 +1,46 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { Button, Col, Container, Row } from "react-bootstrap";
+// Import React Bootstrap Components
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Card from "react-bootstrap/Card";
 
+// Import custom SCSS
 import "./genre-view.scss";
 
 export class GenreView extends React.Component {
   render() {
-    const { movies, onBackClick } = this.props;
+
+    const { director, onBackClick } = this.props;
+    console.log(director);
+    const { genres, title } = director;
+    
 
     return (
       <Container>
-        <Row>
-          <Col className="label">Genre: </Col>
-          <Col className="value">{movies.genres.Name}</Col>
-        </Row>
-        <Row className="mt-3">
-          <Col className="label">Description: </Col>
-          <Col className="value">{movies.genres.Description}</Col>
-        </Row>
-        <Button
-          className="d-block mt-3"
-          onClick={() => {
-            onBackClick(null);
-          }}
-          variant="primary"
-        >
-          Back
-        </Button>
+        <Card className="genre-view">
+          <Card.Header className="genre-view-header">Genre</Card.Header>
+          <Card.Body className="genre-view-title">{genres.Name}</Card.Body>
+          <Card.Body>{genres.Description}</Card.Body>
+          <Card.Footer>
+            <Button
+              className="genre-view-button"
+              onClick={() => {
+                onBackClick();
+              }}
+            >
+              Back
+            </Button>
+          </Card.Footer>
+        </Card>
       </Container>
     );
   }
 }
 
-GenreView.propTypes = {
-  genres: PropTypes.shape({
+GenreView.proptypes = {
+  Genre: PropTypes.shape({
     Name: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
   }).isRequired,

@@ -6,7 +6,8 @@
   "enabledApiProposals": [],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "babel src -d lib"
+    "build": "babel src -d lib",
+    "start": "parcel serve src/index.html "
   },
   "repository": {
     "type": "git",
@@ -20,11 +21,13 @@
   "homepage": "https://github.com/maicoding/myFlix-client#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "parcel": "^2.7.0",
+    "parcel-bundler": "^1.12.5",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^5.3.1"
+    "react-router-dom": "^5.3.0"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.9",
@@ -41,5 +44,17 @@
   },
   "alias": {
     "process": false
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }

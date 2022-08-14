@@ -6,12 +6,16 @@ $middlebluegreen: rgb(129, 230, 217);
 $font-family_1: "Pathway Gothic One", sans-serif;
 $font-family_2: "League Gothic", sans-serif;
 
-.genre-view-header {
+.dir-view {
+  background-color: $background-color;
+}
+
+.dir-view-header {
   font-variant: small-caps;
   font-size: 25px;
 }
 
-.genre-view-button {
+.dir-view-button {
   border: none;
   display: inline-block;
   background-color: $tealblue;
@@ -26,13 +30,13 @@ $font-family_2: "League Gothic", sans-serif;
   width: 100%;
 }
 
-.genre-view-button:hover {
+.dir-view-button:hover {
   cursor: pointer;
   opacity: 0.5;
   background-color: $tealblue;
 }
 
-.genre-view-title {
+.dir-view-title {
   display: block;
   text-align: left;
   font-size: 35px;
@@ -41,22 +45,21 @@ $font-family_2: "League Gothic", sans-serif;
 }
 
 .card-body {
-  // color: #fff !important;
   padding: 10px;
 }
 
-.genre-view__grid {
+.dir-view__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
-.genre-info {
+.dir-info {
   display: grid;
   grid-template-rows: 50px 50px 4fr;
 }
 
 @media (max-width: 700px) {
-  .genre-view__grid {
+  .dir-view__grid {
     display: block;
   }
 }

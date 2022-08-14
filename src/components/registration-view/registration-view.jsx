@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
-import axios from "axios";
 import {
   Form,
   Button,
@@ -12,6 +10,8 @@ import {
   Nav,
   NavBar,
 } from "react-bootstrap";
+import PropTypes from "prop-types";
+import axios from "axios";
 
 // user registration function
 export function RegistrationView(props) {
@@ -19,7 +19,7 @@ export function RegistrationView(props) {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
-  // Declare hook for each input error message (when invalid)
+
   const [values, setValues] = useState({
     usernameErr: "",
     passwordErr: "",
@@ -29,77 +29,79 @@ export function RegistrationView(props) {
 
   const validate = () => {
     let isReq = true;
-    setValues((prev) => {
-      return {
-        usernameErr: "",
-        passwordErr: "",
-        emailErr: "",
-        birthdayErr: "",
-      };
-    });
     if (!username) {
-      // setValues re-defines values through a callback that receives
-      // the previous state of values & must return values updated
-      setValues((prevValues) => {
-        return { ...prevValues, usernameErr: "Username is required." };
-      });
+      setValues({ ...values, usernameErr: "Username required" });
       isReq = false;
     } else if (username.length < 5) {
-      setValues((prevValues) => {
-        return {
-          ...prevValues,
-          usernameErr: "Username must be at least 5 characters long.",
-        };
+      setValues({
+        ...values,
+        usernameErr: "Username must be at least 5 characters long",
       });
+
+      isReq = false;
     }
     if (!password) {
-      setValues((prevValues) => {
-        return { ...prevValues, passwordErr: "Password is required." };
-      });
+      setValues({ ...values, passwordErr: "Password required" });
       isReq = false;
     } else if (password.length < 6) {
-      setValues((prevValues) => {
-        return {
-          ...prevValues,
-          passwordErr: "Password must be at least 6 characters long.",
-        };
+      setValues({
+        ...values,
+        passwordErr: "Password must be 6 characters long",
+      });
+      isReq = false;
+    }
+    if (!birthday) {
+      setValues({
+        ...values,
+        birthdayErr: "Password must be 6 characters long",
       });
       isReq = false;
     }
     if (!email) {
       setValues({
         ...values,
-        emailErr: "Email is required.",
+        emailErr: "Password must be 6 characters long",
       });
       isReq = false;
-    } else if (email.indexOf("@") === -1) {
-      setValues((prevValues) => {
-        return { ...prevValues, emailErr: "Enter a valid email address." };
-      });
-      isReg = false;
-    }
-    if (!birthday) {
-      setValues((prevValues) => {
-        return { ...prevValues, birthdayErr: "Enter a valid date." };
+    } else if (email.indexOf('@')===-1) {
+      setValues({
+        ...values,
+        emailErr: "Invalid email",
       });
       isReq = false;
     }
+
     return isReq;
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(username, password, email, birthday);
+   const isReq = validate()
+    if (isReq) {
+      axios
+        .post("https://maicoding-movieapi.herokuapp.com/users", {
+          Username: username,
+          Password: password,
+          Email: email,
+          Birthday: birthday,
+        })
+        .then((response) => {
+          const data = response.data;
+          // props.onLoggedIn(data);
+          alert("Registration sucessful, please login");
+          window.open("/", "_self");
+        })
+        .catch((response) => {
+          console.error(response);
+          alert("Unable to register");
+        });
+    }
   };
 
   return (
     <Container>
-      <Navbar bg="light" expand="lg">
-        <Container fluid>
-          <Navbar.Brand href="#home">AppforMovies</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              <Nav.Link href="/register">Register</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
+      
       <Row className="justify-content-md-center">
         <Col md={8}>
           <CardGroup>
@@ -115,6 +117,7 @@ export function RegistrationView(props) {
                       required
                       placeholder="Enter a user name"
                     />
+                    {values.usernameErr && <p>{values.usernameErr}</p>}
                   </Form.Group>
 
                   <Form.Group controlId="formPassword">
@@ -126,6 +129,7 @@ export function RegistrationView(props) {
                       placeholder="Your password has to be at least 8 characters long"
                       minLength="8"
                     />
+                    {values.passwordErr && <p>{values.passwordErr}</p>}
                   </Form.Group>
                   <Form.Group controlId="formEmail">
                     <Form.Label>email:</Form.Label>
@@ -135,6 +139,17 @@ export function RegistrationView(props) {
                       required
                       placeholder="Your email"
                     />
+                    {values.emailErr && <p>{values.emailErr}</p>}
+                  </Form.Group>
+                  <Form.Group controlId="formBirthday">
+                    <Form.Label>birthday:</Form.Label>
+                    <Form.Control
+                      type="date"
+                      onChange={(e) => setBirthday(e.target.value)}
+                      required
+                      placeholder="Your birthday"
+                    />
+                    {values.birthdayErr && <p>{values.birthdayErr}</p>}
                   </Form.Group>
                   <Button
                     variant="primary"
@@ -159,4 +174,6 @@ RegistrationView.propTypes = {
     email: PropTypes.string.isRequired,
   }),
   onLoggedIn: PropTypes.func.isRequired,
+  onRegister: PropTypes.func.isRequired,
+
 };

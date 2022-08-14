@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./navbar.scss";
 
-export function NavBar() {
+export function Menu() {
   let user = localStorage.getItem("user");
 
   const handleLogOut = (e) => {

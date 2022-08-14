@@ -1,0 +1,119 @@
+.logout {
+  border: none;
+  display: inline-block;
+  background-color: rgb(51, 109, 130);
+  font-size: 14px;
+  color: rgb(238, 240, 242);
+  font-family: "Pathway Gothic One", sans-serif;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.2s opacity;
+  width: 100%;
+}
+
+.logout:hover,
+.logout:focus {
+  cursor: pointer;
+  opacity: 0.5;
+  background-color: rgb(51, 109, 130);
+  color: rgb(25, 29, 50);
+  text-decoration: none;
+}
+
+.navbar-logo {
+  color: black !important;
+}
+
+.navbar-toggler {
+  border: solid !important;
+  color: black !important;
+}
+
+.navbar-toggler-icon {
+  color: black !important;
+}
+
+.nav-link {
+  color: black !important;
+}
+.row {
+  margin: 10px;
+}
+
+.user-profile {
+  background-color: rgb(238, 240, 242);
+  color: rgb(25, 29, 50);
+  padding-bottom: 10px;
+}
+
+.update-inputs {
+  background-color: rgb(238, 240, 242);
+  color: rgb(25, 29, 50);
+  padding-bottom: 10px;
+}
+
+.favmov-inputs {
+  background-color: rgb(238, 240, 242);
+  color: rgb(25, 29, 50);
+  padding-bottom: 10px;
+}
+.genre-view-header {
+  font-variant: small-caps;
+  font-size: 25px;
+}
+
+.genre-view-button {
+  border: none;
+  display: inline-block;
+  background-color: rgb(51, 109, 130);
+  font-size: 14px;
+  color: rgb(238, 240, 242);
+  font-family: "Pathway Gothic One", sans-serif;
+  text-decoration: none;
+  margin-top: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 0.2s opacity;
+  width: 100%;
+}
+
+.genre-view-button:hover {
+  cursor: pointer;
+  opacity: 0.5;
+  background-color: rgb(51, 109, 130);
+}
+
+.genre-view-title {
+  display: block;
+  text-align: left;
+  font-size: 35px;
+  font-weight: 400;
+  font-family: "League Gothic", sans-serif;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.genre-view__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.genre-info {
+  display: grid;
+  grid-template-rows: 50px 50px 4fr;
+}
+
+@media (max-width: 700px) {
+  .genre-view__grid {
+    display: block;
+  }
+}
+.my-flix {
+  color: steelblue;
+}
+
+/*# sourceMappingURL=/src.78399e21.css.map */
