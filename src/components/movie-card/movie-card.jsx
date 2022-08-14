@@ -12,7 +12,11 @@ export class MovieCard extends React.Component {
 
     return (
       <Card>
-        <Card.Img variant="top" src={movie.ImagePath} />
+        <Card.Img
+          style={{ width: "14rem", height: "18rem" }}
+          variant="top"
+          src={movie.ImagePath}
+        />
         <Card.Body>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>{movie.Description}</Card.Text>
@@ -24,7 +28,6 @@ export class MovieCard extends React.Component {
     );
   }
 }
-
 
 // export class MovieCard extends React.Component {
 //   render() {
