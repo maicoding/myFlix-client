@@ -1,6 +1,104 @@
+.logout {
+  color: #eef0f2;
+  width: 100%;
+  background-color: #336d82;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding: 10px;
+  font-family: Pathway Gothic One, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  transition: opacity .2s;
+  display: inline-block;
+}
+
+.logout:hover, .logout:focus {
+  cursor: pointer;
+  opacity: .5;
+  color: #191d32;
+  background-color: #336d82;
+  text-decoration: none;
+}
+
+.navbar-logo {
+  color: #000 !important;
+}
+
+.navbar-toggler {
+  color: #000 !important;
+  border: solid !important;
+}
+
+.navbar-toggler-icon, .nav-link {
+  color: #000 !important;
+}
 
 
 
+.row {
+  margin: 10px;
+}
+
+.user-profile, .update-inputs, .favmov-inputs {
+  color: #191d32;
+  background-color: #eef0f2;
+  padding-bottom: 10px;
+}
+
+.genre-view-header {
+  font-variant: small-caps;
+  font-size: 25px;
+}
+
+.genre-view-button {
+  color: #eef0f2;
+  width: 100%;
+  background-color: #336d82;
+  border: none;
+  border-radius: 8px;
+  margin-top: 10px;
+  padding: 10px;
+  font-family: Pathway Gothic One, sans-serif;
+  font-size: 14px;
+  text-decoration: none;
+  transition: opacity .2s;
+  display: inline-block;
+}
+
+.genre-view-button:hover {
+  cursor: pointer;
+  opacity: .5;
+  background-color: #336d82;
+}
+
+.genre-view-title {
+  text-align: left;
+  font-family: League Gothic, sans-serif;
+  font-size: 35px;
+  font-weight: 400;
+  display: block;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+.genre-view__grid {
+  grid-template-columns: 1fr 1fr;
+  display: grid;
+}
+
+.genre-info {
+  grid-template-rows: 50px 50px 4fr;
+  display: grid;
+}
+
+@media (max-width: 700px) {
+  .genre-view__grid {
+    display: block;
+  }
+}
 
 .my-flix {
   color: #4682b4;
