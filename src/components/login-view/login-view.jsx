@@ -5,7 +5,7 @@ import {
   Form,
   Button,
   Container,
-  Col,  
+  Col,
   Row,
   Card,
   CardGroup,
@@ -74,7 +74,7 @@ export function LoginView(props) {
         </Container>
       </Navbar>
       <Row className="justify-content-md-center">
-        <Col md={8}>
+        <Col Col lg={7} md={8} xs={12}>
           <CardGroup>
             <Card>
               <Card.Body>
