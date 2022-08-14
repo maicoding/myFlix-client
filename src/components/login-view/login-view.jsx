@@ -69,7 +69,7 @@ export function LoginView(props) {
       <Navbar navbar navbar-expand navbar-light>
         <Container>
           <Nav.Item>
-            <Nav.Link eventKey="/Registraion">Registration</Nav.Link>
+            <Nav.Link eventKey="/Registration">Registration</Nav.Link>
           </Nav.Item>
         </Container>
       </Navbar>

@@ -39660,7 +39660,7 @@ function LoginView(props) {
                 children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Container), {
                     children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Item, {
                         children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Nav).Link, {
-                            eventKey: "/Registraion",
+                            eventKey: "/Registration",
                             children: "Registration"
                         }, void 0, false, {
                             fileName: "src/components/login-view/login-view.jsx",
