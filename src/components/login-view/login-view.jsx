@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Menu } from "../navbar/navbar.jsx";
 import {
   Form,
   Button,
@@ -13,6 +12,7 @@ import {
   Navbar,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
+
 import "./login-view.scss";
 import axios from "axios";
 
@@ -35,7 +35,7 @@ export function LoginView(props) {
       setPasswordErr("Password Required");
       isReq = false;
     } else if (password.length < 6) {
-      setPassword("Password must be 6 characters long");
+      setPassword("Password must be at least 6 characters long");
       isReq = false;
     }
 
@@ -65,59 +65,43 @@ export function LoginView(props) {
   };
 
   return (
-    <Container>
-      <Navbar navbar navbar-expand navbar-light>
-        <Container>
-          <Nav.Item>
-            <Nav.Link eventKey="/Registration">Registration</Nav.Link>
-          </Nav.Item>
-        </Container>
-      </Navbar>
-      <Row className="justify-content-md-center">
-        <Col Col lg={7} md={8} xs={12}>
-          <CardGroup>
-            <Card>
-              <Card.Body>
-                <Card.Title>Login</Card.Title>
-                <Form>
-                  <Form.Group controlId="formUsername">
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                      placeholder="Enter a user name"
-                    />
-                    {usernameErr && <p>{usernameErr}</p>}
-                  </Form.Group>
+    <Container fluid="true">
+      <Card>
+        <Card.Body>
+          <Card.Title>Login</Card.Title>
+          <Form>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                placeholder="Enter a user name"
+              />
+              {usernameErr && <p>{usernameErr}</p>}
+            </Form.Group>
 
-                  <Form.Group controlId="formPassword">
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      type="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      placeholder="Your password has to be at least 8 characters long"
-                      minLength="8"
-                    />
-                    {passwordErr && <p>{passwordErr}</p>}
-                  </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Form>
-                <p>
-                  Need an account? <Link to={"/register"}>Sign up</Link>
-                </p>
-              </Card.Body>
-            </Card>
-          </CardGroup>
-        </Col>
-      </Row>
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Your password has to be at least 8 characters long"
+                minLength="8"
+              />
+              {passwordErr && <p>{passwordErr}</p>}
+            </Form.Group>
+            <br />
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Form>
+          <p>
+            Need an account? <Link to={"/register"}>Sign up</Link>
+          </p>
+        </Card.Body>
+      </Card>
     </Container>
   );
 }

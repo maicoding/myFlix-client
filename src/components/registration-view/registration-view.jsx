@@ -28,6 +28,7 @@ export function RegistrationView(props) {
   });
 
   const validate = () => {
+    console.log(username, password, email, birthday);
     let isReq = true;
     if (!username) {
       setValues({ ...values, usernameErr: "Username required" });
@@ -37,47 +38,49 @@ export function RegistrationView(props) {
         ...values,
         usernameErr: "Username must be at least 5 characters long",
       });
-
       isReq = false;
     }
     if (!password) {
+      console.log("no pass");
       setValues({ ...values, passwordErr: "Password required" });
       isReq = false;
-    } else if (password.length < 6) {
+      console.log(values);
+    } else if (password.length < 8) {
+      console.log("pass too short");
       setValues({
         ...values,
-        passwordErr: "Password must be 6 characters long",
+        passwordErr: "Password must be 8 characters long",
       });
       isReq = false;
     }
     if (!birthday) {
       setValues({
         ...values,
-        birthdayErr: "Password must be 6 characters long",
+        birthdayErr: "Birthday required",
       });
       isReq = false;
     }
     if (!email) {
       setValues({
         ...values,
-        emailErr: "Password must be 6 characters long",
+        emailErr: "Email is required",
       });
       isReq = false;
-    } else if (email.indexOf('@')===-1) {
+    } else if (email.indexOf("@") === -1) {
       setValues({
         ...values,
         emailErr: "Invalid email",
       });
       isReq = false;
     }
-
     return isReq;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(username, password, email, birthday);
-   const isReq = validate()
+    const isReq = validate();
+    console.log(isReq);
     if (isReq) {
       axios
         .post("https://maicoding-movieapi.herokuapp.com/users", {
@@ -101,69 +104,58 @@ export function RegistrationView(props) {
 
   return (
     <Container>
-      
-      <Row className="justify-content-md-center">
-        <Col md={8}>
-          <CardGroup>
-            <Card>
-              <Card.Body>
-                <Card.Title>Registration</Card.Title>
-                <Form>
-                  <Form.Group controlId="formUsername">
-                    <Form.Label>Username:</Form.Label>
-                    <Form.Control
-                      type="text"
-                      onChange={(e) => setUsername(e.target.value)}
-                      required
-                      placeholder="Enter a user name"
-                    />
-                    {values.usernameErr && <p>{values.usernameErr}</p>}
-                  </Form.Group>
+      <Card>
+        <Card.Body>
+          <Card.Title>Registration</Card.Title>
+          <Form>
+            <Form.Group controlId="formUsername">
+              <Form.Label>Username:</Form.Label>
+              <Form.Control
+                type="text"
+                onChange={(e) => setUsername(e.target.value)}
+                required
+                placeholder="Enter a user name"
+              />
+              {values.usernameErr && <p>{values.usernameErr}</p>}
+            </Form.Group>
 
-                  <Form.Group controlId="formPassword">
-                    <Form.Label>Password:</Form.Label>
-                    <Form.Control
-                      type="password"
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                      placeholder="Your password has to be at least 8 characters long"
-                      minLength="8"
-                    />
-                    {values.passwordErr && <p>{values.passwordErr}</p>}
-                  </Form.Group>
-                  <Form.Group controlId="formEmail">
-                    <Form.Label>email:</Form.Label>
-                    <Form.Control
-                      type="email"
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      placeholder="Your email"
-                    />
-                    {values.emailErr && <p>{values.emailErr}</p>}
-                  </Form.Group>
-                  <Form.Group controlId="formBirthday">
-                    <Form.Label>birthday:</Form.Label>
-                    <Form.Control
-                      type="date"
-                      onChange={(e) => setBirthday(e.target.value)}
-                      required
-                      placeholder="Your birthday"
-                    />
-                    {values.birthdayErr && <p>{values.birthdayErr}</p>}
-                  </Form.Group>
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    onClick={handleSubmit}
-                  >
-                    Submit
-                  </Button>
-                </Form>
-              </Card.Body>
-            </Card>
-          </CardGroup>
-        </Col>
-      </Row>
+            <Form.Group controlId="formPassword">
+              <Form.Label>Password:</Form.Label>
+              <Form.Control
+                type="password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                placeholder="Your password has to be at least 8 characters long"
+                minLength="8"
+              />
+              {values.passwordErr && <p>{values.passwordErr}</p>}
+            </Form.Group>
+            <Form.Group controlId="formEmail">
+              <Form.Label>email:</Form.Label>
+              <Form.Control
+                type="email"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                placeholder="Your email"
+              />
+              {values.emailErr && <p>{values.emailErr}</p>}
+            </Form.Group>
+            <Form.Group controlId="formBirthday">
+              <Form.Label>birthday:</Form.Label>
+              <Form.Control
+                type="date"
+                onChange={(e) => setBirthday(e.target.value)}
+                required
+                placeholder="Your birthday"
+              />
+              {values.birthdayErr && <p>{values.birthdayErr}</p>}
+            </Form.Group>
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
+              Submit
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </Container>
   );
 }
@@ -173,7 +165,6 @@ RegistrationView.propTypes = {
     password: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
   }),
-  onLoggedIn: PropTypes.func.isRequired,
-  onRegister: PropTypes.func.isRequired,
-
+  onLoggedIn: PropTypes.func,
+  onRegister: PropTypes.func,
 };

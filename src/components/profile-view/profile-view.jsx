@@ -31,7 +31,6 @@ export class ProfileView extends React.Component {
   componentDidMount() {
     const accessToken = localStorage.getItem("token");
     this.getUser(accessToken);
-    
   }
 
   getUser = (token) => {
@@ -43,7 +42,7 @@ export class ProfileView extends React.Component {
       .then(async (response) => {
         console.log(response);
         const data = await response.data;
-     
+
         this.setState(() => {
           return {
             ...this.state,
@@ -181,7 +180,7 @@ export class ProfileView extends React.Component {
       this.state;
 
     return (
-      <Container>
+      <Container fluid="true">
         <Row>
           <Col>
             <Card className="user-profile">
