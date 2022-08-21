@@ -11,28 +11,25 @@ import "./genre-view.scss";
 
 export class GenreView extends React.Component {
   render() {
-
-    const { director, onBackClick } = this.props;
-    console.log(director);
-    const { genres, title } = director;
-    
+    const { Genre, onBackClick } = this.props;
 
     return (
       <Container>
-        <Card className="genre-view">
-          <Card.Header className="genre-view-header">Genre</Card.Header>
-          <Card.Body className="genre-view-title">{genres.Name}</Card.Body>
-          <Card.Body>{genres.Description}</Card.Body>
-          <Card.Footer>
-            <Button
-              className="genre-view-button"
-              onClick={() => {
-                onBackClick();
-              }}
-            >
-              Back
-            </Button>
-          </Card.Footer>
+        <Card>
+          <Card.Header></Card.Header>
+          <Card.Body>
+            <Card.Title>{movies.genres.Name}</Card.Title>
+            <Card.Text>{movies.genres.Description}</Card.Text>
+            <Card.Footer>
+              <Button
+                onClick={() => {
+                  onBackClick(null);
+                }}
+              >
+                Back
+              </Button>
+            </Card.Footer>
+          </Card.Body>
         </Card>
       </Container>
     );

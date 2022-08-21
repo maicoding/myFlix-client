@@ -1,54 +1,46 @@
 import React from "react";
-import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
+// Import React Bootstrap components
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import Button from "react-bootstrap/Button";
+
+// Import Custom CSS
 import "./navbar.scss";
 
-export function Menu() {
-  let user = localStorage.getItem("user");
+export function NavbarView() {
+  const user = localStorage.getItem("user");
 
-  const handleLogOut = (e) => {
-    e.preventDefault();
+  onLoggedOut = () => {
     localStorage.clear();
     window.open("/", "_self");
-    props.onLoggedOut(user);
-  };
-
-  const isAuth = () => {
-    if (typeof window == "undefined") {
-      return false;
-    }
-    if (localStorage.getItem("token")) {
-      return localStorage.getItem("token");
-    } else {
-      return false;
-    }
   };
 
   return (
-    <Navbar collapseOnSelect expand="xxl" variant="dark">
-      <Container>
-        <Navbar.Brand className="navbar-logo" href="/">
-          myFlix
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-        <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="me-auto">
-            {isAuth() && (
-              <Nav.Link as={Link} to={`/users/${user}`}>
-                {user}
-              </Nav.Link>
-            )}
-            {isAuth() && (
-              <Button className="logout" variant="link" onClick={handleLogOut}>
-                Logout
-              </Button>
-            )}
-            {!isAuth() && <Nav.Link href="/">Sign in</Nav.Link>}
-            {!isAuth() && <Nav.Link href="/register">Sign up</Nav.Link>}
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
+    <Navbar variant="light" expand="md">
+      <Nav
+        activeKey="/home"
+        onSelect={(selectedKey) => alert(`selected ${selectedKey}`)}
+      >
+        <Navbar>
+          <Nav.Item>
+            <Nav.Link href="/home">Home</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="/Login">Login</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="/My Profile">My Profile</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="/Registraion">Registration</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="/Logout">Logout</Nav.Link>
+          </Nav.Item>
+        </Navbar>
+      </Nav>
     </Navbar>
   );
 }

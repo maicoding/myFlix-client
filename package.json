@@ -22,6 +22,7 @@
   "dependencies": {
     "@parcel/reporter-dev-server": "^2.6.2",
     "axios": "^0.27.2",
+    "firebase": "^9.9.3",
     "parcel": "^1.12.4",
     "parcel-bundler": "^1.3.1",
     "prop-types": "^15.8.1",
