@@ -15,37 +15,41 @@ import {
 import { Link } from "react-router-dom";
 
 export class MovieView extends React.Component {
-  keypressCallback(event) {
-    console.log(event.key);
+  constructor() {
+    super();
+
+    this.state = {};
   }
 
-  addFavoriteMovie() {
-    const token = localStorage.getItem("token");
-    const user = localStorage.getItem("user");
-
+  addFavoriteMovie(e) {
+    const { movie } = this.props;
+    e.preventDefault();
     axios
       .post(
-        `https://maicoding-movieapi.herokuapp.com/movies${user}/movies/${this.props.movie._id}`,
-        {},
+        `https://ap-myflix.herokuapp.com/users/${localStorage.getItem(
+          "user"
+        )}/Movies/${movie._id}`,
+        { username: localStorage.getItem("user") },
         {
-          headers: { Authorization: `Bearer ${token}` },
-          method: "POST",
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       )
-      .then((response) => {
-        alert(`Added ${this.props.movie.Title} to your favorites!`);
+      .then((res) => {
+        alert(`${movie.title} successfully added to your favorites`);
       })
-      .catch(function (error) {
-        console.log(error);
+      // .then(res => {
+      //   window.open(`/users/${localStorage.getItem('user')}`)
+      // })
+      .then((res) => {
+        document.location.reload(true);
+      })
+      .catch((error) => {
+        alert(`${movie.title} not added to your favorites` + error);
       });
   }
 
-  componentDidMount() {
-    document.addEventListener("keypress", this.keypressCallback);
-  }
-
   render() {
-    const { movie, onBackClick } = this.props;
+    const { movie, director, onBackClick } = this.props;
     const { directors, genres } = movie;
     const { Name } = directors;
 

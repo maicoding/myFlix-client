@@ -11,20 +11,20 @@ import "./director-view.scss";
 
 export class DirectorView extends React.Component {
   render() {
-    const { directors, onBackClick } = this.props;
+    const { movie, onBackClick } = this.props;
 
     return (
       <Container>
         <Card className="director-card">
           <Card.Body>
             <Card.Title className="director-card-title">
-              {directors.Name}
+              {movie.directors.Name}
             </Card.Title>
             <Card.Text className="director-card-text">
-              Born: {directors.Birth}
+              Born: {movie.directors.Birth}
             </Card.Text>
             <Card.Text className="director-card-text">
-              {directors.Bio}
+              {movie.directors.Bio}
             </Card.Text>
             <Card.Footer className="director-card-footer">
               <Button
@@ -43,7 +43,7 @@ export class DirectorView extends React.Component {
 }
 
 DirectorView.proptypes = {
-  Director: PropTypes.shape({
+  directors: PropTypes.shape({
     Name: PropTypes.string.isRequired,
     Bio: PropTypes.string.isRequired,
     Birth: PropTypes.number.isRequired,

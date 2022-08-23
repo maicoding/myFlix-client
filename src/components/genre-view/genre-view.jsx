@@ -18,8 +18,8 @@ export class GenreView extends React.Component {
         <Card>
           <Card.Header></Card.Header>
           <Card.Body>
-            <Card.Title>{movies.genres.Name}</Card.Title>
-            <Card.Text>{movies.genres.Description}</Card.Text>
+            <Card.Title>{movie.genres.Name}</Card.Title>
+            <Card.Text>{movie.genres.Description}</Card.Text>
             <Card.Footer>
               <Button
                 onClick={() => {

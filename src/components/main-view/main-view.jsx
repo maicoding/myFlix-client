@@ -185,7 +185,8 @@ export default class MainView extends React.Component {
                         <DirectorView
                           Director={
                             movies.find(
-                              (m) => m.director.Name === match.params.Name
+                              (m) =>
+                                m.directors.Name === match.params.directorsName
                             ).Director
                           }
                           movies={movies}
@@ -213,7 +214,7 @@ export default class MainView extends React.Component {
                           movies={movies}
                           Genre={
                             movies.find(
-                              (m) => m.Genre.Name === match.params.Name
+                              (m) => m.genres.Name === match.params.genresName
                             ).Genre
                           }
                           onBackClick={() => history.goBack()}

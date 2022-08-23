@@ -27,15 +27,15 @@ export function LoginView(props) {
     if (!username) {
       setUsernameErr("Username Required");
       isReq = false;
-    } else if (username.length < 2) {
-      setUsernameErr("Username must be 2 characters long");
+    } else if (username.length < 4) {
+      setUsernameErr("Username must be 4 characters long");
       isReq = false;
     }
     if (!password) {
       setPasswordErr("Password Required");
       isReq = false;
-    } else if (password.length < 6) {
-      setPassword("Password must be at least 6 characters long");
+    } else if (password.length < 8) {
+      setPassword("Password must be at least 8 characters long");
       isReq = false;
     }
 
