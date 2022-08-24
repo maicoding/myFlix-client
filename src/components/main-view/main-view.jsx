@@ -19,7 +19,7 @@ import { RegistrationView } from "../registration-view/registration-view";
 
 import { ProfileView } from "../profile-view/profile-view";
 import { GenreView } from "../genre-view/genre-view";
-import { NavbarView } from "../navbar-view/navbar-view";
+import { Menubar } from "../navbar/navbar";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
@@ -108,11 +108,11 @@ export default class MainView extends React.Component {
     const { movies, user } = this.state;
     return (
       <Container>
-        <NavbarView />
-        <Row>
-          {" "}
-          <Col>
-            <Router>
+        <Router>
+          <Menubar user={user} />
+          <Row>
+            {" "}
+            <Col>
               <Row className="main-view justify-content-md-center">
                 <Route
                   exact
@@ -248,9 +248,9 @@ export default class MainView extends React.Component {
                   }}
                 />
               </Row>
-            </Router>
-          </Col>
-        </Row>
+            </Col>
+          </Row>
+        </Router>
       </Container>
     );
   }

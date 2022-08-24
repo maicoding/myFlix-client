@@ -124,42 +124,6 @@
   }
 }
 
-.logout {
-  color: #eef0f2;
-  width: 100%;
-  background-color: #336d82;
-  border: none;
-  border-radius: 8px;
-  margin-top: 10px;
-  padding: 10px;
-  font-family: Pathway Gothic One, sans-serif;
-  font-size: 14px;
-  text-decoration: none;
-  transition: opacity .2s;
-  display: inline-block;
-}
-
-.logout:hover, .logout:focus {
-  cursor: pointer;
-  opacity: .5;
-  color: #191d32;
-  background-color: #336d82;
-  text-decoration: none;
-}
-
-.navbar-logo {
-  color: #000 !important;
-}
-
-.navbar-toggler {
-  color: #000 !important;
-  border: solid !important;
-}
-
-.navbar-toggler-icon, .nav-link {
-  color: #000 !important;
-}
-
 .my-flix {
   color: #4682b4;
 }

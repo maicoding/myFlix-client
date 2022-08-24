@@ -26,7 +26,7 @@ export class MovieView extends React.Component {
     e.preventDefault();
     axios
       .post(
-        `https://ap-myflix.herokuapp.com/users/${localStorage.getItem(
+        `https://maicoding-movieapi.herokuapp.com/users/${localStorage.getItem(
           "user"
         )}/Movies/${movie._id}`,
         { username: localStorage.getItem("user") },
@@ -49,8 +49,8 @@ export class MovieView extends React.Component {
   }
 
   render() {
-    const { movie, director, onBackClick } = this.props;
-    const { directors, genres } = movie;
+    const { movie, onBackClick } = this.props;
+    const { directors } = movie;
     const { Name } = directors;
 
     console.log(movie);
@@ -113,11 +113,5 @@ MovieView.propTypes = {
     title: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
     ImagePath: PropTypes.string,
-    directors: PropTypes.shape({
-      Name: PropTypes.string.isRequired,
-      Bio: PropTypes.string.isRequired,
-      Birth: PropTypes.string.isRequired,
-      Death: PropTypes.string,
-    }),
   }).isRequired,
 };
