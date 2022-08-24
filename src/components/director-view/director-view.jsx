@@ -11,21 +11,19 @@ import "./director-view.scss";
 
 export class DirectorView extends React.Component {
   render() {
-    const { movie, onBackClick } = this.props;
+    const { director, onBackClick } = this.props;
 
     return (
       <Container>
         <Card className="director-card">
           <Card.Body>
             <Card.Title className="director-card-title">
-              {movie.directors.Name}
+              <h3>{director.Name}</h3>
             </Card.Title>
             <Card.Text className="director-card-text">
-              Born: {movie.directors.Birth}
+              Born: {director.Birth}
             </Card.Text>
-            <Card.Text className="director-card-text">
-              {movie.directors.Bio}
-            </Card.Text>
+            <Card.Text className="director-card-text">{director.Bio}</Card.Text>
             <Card.Footer className="director-card-footer">
               <Button
                 onClick={() => {

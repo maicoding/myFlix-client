@@ -19,7 +19,7 @@ import { RegistrationView } from "../registration-view/registration-view";
 
 import { ProfileView } from "../profile-view/profile-view";
 import { GenreView } from "../genre-view/genre-view";
-import { NavbarView } from "../navbar/navbar";
+import { NavbarView } from "../navbar-view/navbar-view";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
@@ -108,6 +108,7 @@ export default class MainView extends React.Component {
     const { movies, user } = this.state;
     return (
       <Container>
+        <NavbarView />
         <Row>
           {" "}
           <Col>
@@ -132,7 +133,6 @@ export default class MainView extends React.Component {
                     ));
                   }}
                 />
-
                 <Route
                   path="/register"
                   render={() => {
@@ -182,21 +182,19 @@ export default class MainView extends React.Component {
                       return <div className="main-view" />;
                     return (
                       <Col md={8}>
+                        {" "}
                         <DirectorView
-                          Director={
+                          director={
                             movies.find(
-                              (m) =>
-                                m.directors.Name === match.params.directorsName
-                            ).Director
+                              (m) => m.directors.Name === match.params.Name
+                            ).directors
                           }
-                          movies={movies}
                           onBackClick={() => history.goBack()}
-                        />
+                        />{" "}
                       </Col>
                     );
                   }}
                 />
-
                 <Route
                   path="/genres/:Name"
                   render={({ match, history }) => {
@@ -210,15 +208,15 @@ export default class MainView extends React.Component {
                       return <div className="main-view" />;
                     return (
                       <Col md={8}>
+                        {" "}
                         <GenreView
-                          movies={movies}
-                          Genre={
+                          genre={
                             movies.find(
-                              (m) => m.genres.Name === match.params.genresName
-                            ).Genre
+                              (m) => m.genres.Name === match.params.Name
+                            ).genres
                           }
                           onBackClick={() => history.goBack()}
-                        />
+                        />{" "}
                       </Col>
                     );
                   }}

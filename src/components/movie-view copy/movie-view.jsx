@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Menu } from "../navbar/navbar.jsx";
+import { Menu } from "../navbar/navbar-view.jsx";
 import {
   Container,
   Col,
@@ -24,10 +24,9 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
-    const {directors, genres} = movie
-    const{Name} = directors
-   
-  
+    const { directors, genres } = movie;
+    const { Name } = directors;
+
     console.log(movie);
     return (
       <Container>
@@ -77,7 +76,9 @@ export class MovieView extends React.Component {
                       Back
                     </button>
                     <Button variant="link">
-                      <Link to={`/directors/${movie.directors.Name}`}>Director</Link>
+                      <Link to={`/directors/${movie.directors.Name}`}>
+                        Director
+                      </Link>
                     </Button>
 
                     <Link to={`/genres/${movie.genres.Name}`}>

@@ -11,16 +11,19 @@ import "./genre-view.scss";
 
 export class GenreView extends React.Component {
   render() {
-    const { Genre, onBackClick } = this.props;
+    const { genre, onBackClick } = this.props;
 
     return (
       <Container>
-        <Card>
-          <Card.Header></Card.Header>
+        <Card className="genre-card">
           <Card.Body>
-            <Card.Title>{movie.genres.Name}</Card.Title>
-            <Card.Text>{movie.genres.Description}</Card.Text>
-            <Card.Footer>
+            <Card.Title className="genre-card-title">
+              <h3>{genre.Name}</h3>
+            </Card.Title>
+            <Card.Text className="genre-card-text">
+              <h5>Description:</h5> {genre.Description}
+            </Card.Text>
+            <Card.Footer className="genre-card-footer">
               <Button
                 onClick={() => {
                   onBackClick(null);
@@ -37,8 +40,9 @@ export class GenreView extends React.Component {
 }
 
 GenreView.proptypes = {
-  Genre: PropTypes.shape({
+  genres: PropTypes.shape({
     Name: PropTypes.string.isRequired,
     Description: PropTypes.string.isRequired,
-  }).isRequired,
+  }),
+  onBackClick: PropTypes.func.isRequired,
 };
