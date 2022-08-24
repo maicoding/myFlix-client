@@ -1,6 +1,5 @@
 import React from "react";
 import axios from "axios";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 // Import React Bootstrap Components
@@ -10,6 +9,7 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Card from "react-bootstrap/Card";
+import Figure from "react-bootstrap/Figure";
 
 // Import custom SCSS
 import "./profile-view.scss";
@@ -22,7 +22,7 @@ export class ProfileView extends React.Component {
       Password: "",
       Email: "",
       Birthday: "",
-      FavoriteMovies: [],
+      FavouriteMovies: [],
       name: "",
       mail: "",
     };
@@ -48,7 +48,7 @@ export class ProfileView extends React.Component {
             ...this.state,
             name: data.Username,
             mail: data.Email,
-            FavoriteMovies: [...data.FavouriteMovies],
+            FavouriteMovies: [...data.FavouriteMovies],
           };
         });
       })
@@ -57,7 +57,7 @@ export class ProfileView extends React.Component {
       });
   };
 
-  onRemoveFavorite = (e, movie) => {
+  onRemoveFavourite = (e, movie) => {
     const username = localStorage.getItem("user");
     console.log(username);
     const token = localStorage.getItem("token");
@@ -69,7 +69,7 @@ export class ProfileView extends React.Component {
       )
       .then((response) => {
         console.log(response);
-        alert("Movie was removed from favorites.");
+        alert("Movie was removed from favourites.");
         this.componentDidMount();
       })
       .catch(function (error) {
@@ -176,8 +176,16 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies } = this.props;
-    const { FavoriteMovies, Username, Email, Birthday, Password, name, mail } =
-      this.state;
+    const {
+      FavouriteMovies,
+      movie,
+      Username,
+      Email,
+      Birthday,
+      Password,
+      name,
+      mail,
+    } = this.state;
 
     return (
       <Container fluid="true">
@@ -275,15 +283,15 @@ export class ProfileView extends React.Component {
         </Row>
         <Row></Row>
         <Card className="favmov-inputs">
-          {FavoriteMovies.length > 1 ? (
+          {FavouriteMovies.length > 1 ? (
             <Card.Body>
               <Row>
                 <Col xs={12}>
-                  <h4>Favorite Movies</h4>
+                  <h4>Favourite Movies</h4>
                 </Col>
               </Row>
               <Row>
-                {FavoriteMovies.map((ImagePath, Title, _id) => {
+                {FavouriteMovies.map((ImagePath, Title, _id) => {
                   return (
                     <Col key={_id} className="fav-movie">
                       <Figure>
@@ -309,7 +317,7 @@ export class ProfileView extends React.Component {
               {" "}
               <Row>
                 <Col xs={12}>
-                  <h4>No Favorite Movies</h4>
+                  <h4>No Favourite Movies</h4>
                 </Col>
               </Row>
             </Card.Body>
