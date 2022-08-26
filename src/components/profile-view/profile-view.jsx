@@ -23,8 +23,6 @@ export class ProfileView extends React.Component {
       Email: "",
       Birthday: "",
       FavouriteMovies: [],
-      name: "",
-      mail: "",
     };
   }
 
@@ -42,12 +40,14 @@ export class ProfileView extends React.Component {
       .then(async (response) => {
         console.log(response);
         const data = await response.data;
+        console.log("From user api", data);
 
         this.setState(() => {
           return {
-            ...this.state,
-            name: data.Username,
-            mail: data.Email,
+            Username: data.Username,
+            Password: data.Password,
+            Email: data.Email,
+            Birthday: data.Birthday,
             FavouriteMovies: [...data.FavouriteMovies],
           };
         });
@@ -57,14 +57,14 @@ export class ProfileView extends React.Component {
       });
   };
 
-  onRemoveFavourite = (e, movie) => {
+  onRemoveFavourite = (movie) => {
     const username = localStorage.getItem("user");
     console.log(username);
     const token = localStorage.getItem("token");
     console.log(this.props);
     axios
       .delete(
-        `https://maicoding-movieapi.herokuapp.com/users/${Username}/movies/${movie._id}`,
+        `https://maicoding-movieapi.herokuapp.com/users/${username}/movies/${movie._id}`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then((response) => {
@@ -176,17 +176,13 @@ export class ProfileView extends React.Component {
 
   render() {
     const { movies } = this.props;
-    const {
-      FavouriteMovies,
-      movie,
-      Username,
-      Email,
-      Birthday,
-      Password,
-      name,
-      mail,
-    } = this.state;
+    const { FavouriteMovies, movie, Username, Email, Birthday, Password } =
+      this.state;
 
+    console.log("state", this.state);
+
+    const favMovies = movies.filter((m) => FavouriteMovies.includes(m._id));
+    console.log("FavouriteMovies", favMovies);
     return (
       <Container fluid="true">
         <Row>
@@ -195,8 +191,8 @@ export class ProfileView extends React.Component {
               <Card.Header>User Profile</Card.Header>
               <Card.Body>
                 <>
-                  <p>Name: {name}</p>
-                  <p>Email: {mail}</p>
+                  <p>Name: {Username}</p>
+                  <p>Email: {Email}</p>
                   <p>Birthday: {Birthday}</p>
                 </>
               </Card.Body>
@@ -228,6 +224,7 @@ export class ProfileView extends React.Component {
                         onChange={(e) => this.setUsername(e.target.value)}
                         required
                         autoComplete="off"
+                        value={Username}
                       />
                     </Form.Group>
                     <Form.Group>
@@ -239,6 +236,7 @@ export class ProfileView extends React.Component {
                         onChange={(e) => this.setPassword(e.target.value)}
                         required
                         autoComplete="off"
+                        value={Password}
                       />
                     </Form.Group>
                     <Form.Group>
@@ -249,6 +247,7 @@ export class ProfileView extends React.Component {
                         placeholder="New Email"
                         onChange={(e) => this.setEmail(e.target.value)}
                         required
+                        value={Email}
                       />
                     </Form.Group>
                     <Form.Group>
@@ -257,6 +256,7 @@ export class ProfileView extends React.Component {
                         type="date"
                         name="Birthday"
                         onChange={(e) => this.setBirthday(e.target.value)}
+                        value={Birthday}
                       />
                     </Form.Group>
                     <Form.Group>
@@ -283,7 +283,7 @@ export class ProfileView extends React.Component {
         </Row>
         <Row></Row>
         <Card className="favmov-inputs">
-          {FavouriteMovies.length > 1 ? (
+          {favMovies.length > 1 ? (
             <Card.Body>
               <Row>
                 <Col xs={12}>
@@ -291,19 +291,19 @@ export class ProfileView extends React.Component {
                 </Col>
               </Row>
               <Row>
-                {FavouriteMovies.map((ImagePath, Title, _id) => {
+                {favMovies.map((fm) => {
                   return (
-                    <Col key={_id} className="fav-movie">
+                    <Col key={fm._id} className="fav-movie">
                       <Figure>
-                        <Link to={`/movies/${movie._id}`}>
-                          <Figure.Image src={ImagePath} alt={Title} />
-                          <Figure.Caption>{Title}</Figure.Caption>
+                        <Link to={`/movies/${fm._id}`}>
+                          <Figure.Image src={fm.ImagePath} alt={fm.Title} />
+                          <Figure.Caption>{fm.Title}</Figure.Caption>
                         </Link>
                       </Figure>
                       <Button
                         className="remove"
                         variant="secondary"
-                        onClick={() => removeFav(movie._id)}
+                        onClick={() => this.onRemoveFavourite(fm)}
                       >
                         Remove from the list
                       </Button>
