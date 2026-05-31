@@ -1,15 +1,5 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Button,
-  Container,
-  Col,
-  Row,
-  Card,
-  CardGroup,
-  Nav,
-  NavBar,
-} from "react-bootstrap";
+import { Form, Button, Container, Card } from "react-bootstrap";
 import PropTypes from "prop-types";
 import axios from "axios";
 
@@ -28,59 +18,46 @@ export function RegistrationView(props) {
   });
 
   const validate = () => {
-    console.log(username, password, email, birthday);
     let isReq = true;
+    const nextValues = {
+      usernameErr: "",
+      passwordErr: "",
+      emailErr: "",
+      birthdayErr: "",
+    };
+
     if (!username) {
-      setValues({ ...values, usernameErr: "Username required" });
+      nextValues.usernameErr = "Username required";
       isReq = false;
     } else if (username.length < 5) {
-      setValues({
-        ...values,
-        usernameErr: "Username must be at least 5 characters long",
-      });
+      nextValues.usernameErr = "Username must be at least 5 characters long";
       isReq = false;
     }
     if (!password) {
-      console.log("no pass");
-      setValues({ ...values, passwordErr: "Password required" });
+      nextValues.passwordErr = "Password required";
       isReq = false;
-      console.log(values);
     } else if (password.length < 8) {
-      console.log("pass too short");
-      setValues({
-        ...values,
-        passwordErr: "Password must be 8 characters long",
-      });
+      nextValues.passwordErr = "Password must be 8 characters long";
       isReq = false;
     }
     if (!birthday) {
-      setValues({
-        ...values,
-        birthdayErr: "Birthday required",
-      });
+      nextValues.birthdayErr = "Birthday required";
       isReq = false;
     }
     if (!email) {
-      setValues({
-        ...values,
-        emailErr: "Email is required",
-      });
+      nextValues.emailErr = "Email is required";
       isReq = false;
     } else if (email.indexOf("@") === -1) {
-      setValues({
-        ...values,
-        emailErr: "Invalid email",
-      });
+      nextValues.emailErr = "Invalid email";
       isReq = false;
     }
+    setValues(nextValues);
     return isReq;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, password, email, birthday);
     const isReq = validate();
-    console.log(isReq);
     if (isReq) {
       axios
         .post("https://maicoding-movieapi.herokuapp.com/users", {
@@ -90,8 +67,6 @@ export function RegistrationView(props) {
           Birthday: birthday,
         })
         .then((response) => {
-          const data = response.data;
-          // props.onLoggedIn(data);
           alert("Registration sucessful, please login");
           window.open("/", "_self");
         })

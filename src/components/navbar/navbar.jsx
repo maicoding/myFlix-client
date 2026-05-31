@@ -37,7 +37,7 @@ export function Menubar({ user }) {
               <Button
                 variant="link"
                 onClick={() => {
-                  this.onLoggedOut();
+                  onLoggedOut();
                 }}
               >
                 Logout

@@ -1,16 +1,6 @@
 import React from "react";
 import axios from "axios";
-import {
-  Form,
-  Button,
-  Container,
-  Col,
-  Row,
-  Card,
-  CardGroup,
-  Nav,
-  Navbar,
-} from "react-bootstrap";
+import { Container, Col, Row } from "react-bootstrap";
 import { DirectorView } from "../director-view/director-view";
 import { LoginView } from "../login-view/login-view";
 import { MovieCard } from "../movie-card/movie-card";
@@ -20,8 +10,7 @@ import { RegistrationView } from "../registration-view/registration-view";
 import { ProfileView } from "../profile-view/profile-view";
 import { GenreView } from "../genre-view/genre-view";
 import { Menubar } from "../navbar/navbar";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
 export default class MainView extends React.Component {
   constructor() {
@@ -33,14 +22,6 @@ export default class MainView extends React.Component {
       Movies: null,
       user: null,
     };
-  }
-  // Load movies from database
-  componentDidMount() {
-    let accessToken = localStorage.getItem("token");
-    if (accessToken !== null) {
-      this.setState({ user: localStorage.getItem("user") });
-      this.getMovies(accessToken);
-    }
   }
   // Get movies
   getMovies(token) {
@@ -96,6 +77,7 @@ export default class MainView extends React.Component {
   }
 
   loadingCheck(user) {
+    const { movies } = this.state;
     if (!user)
       return (
         <Col>

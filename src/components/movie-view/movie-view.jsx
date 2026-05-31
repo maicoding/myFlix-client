@@ -28,19 +28,16 @@ export class MovieView extends React.Component {
       .post(
         `https://maicoding-movieapi.herokuapp.com/users/${localStorage.getItem(
           "user"
-        )}/Movies/${movie._id}`,
+        )}/movies/${movie._id}`,
         { username: localStorage.getItem("user") },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         }
       )
-      .then((res) => {
+      .then(() => {
         alert(`${movie.title} successfully added to your favorites`);
       })
-      // .then(res => {
-      //   window.open(`/users/${localStorage.getItem('user')}`)
-      // })
-      .then((res) => {
+      .then(() => {
         document.location.reload(true);
       })
       .catch((error) => {
@@ -50,17 +47,22 @@ export class MovieView extends React.Component {
 
   render() {
     const { movie, onBackClick } = this.props;
+    if (!movie) {
+      return null;
+    }
     const { directors } = movie;
-    const { Name } = directors;
 
-    console.log(movie);
     return (
       <Card>
         <Card.Body>
           <Card.Title>Movie View</Card.Title>
           <div className="movie-view">
             <div className="movie-poster">
-              <img className="d-block w-100" src={movie.ImagePath} />
+              <img
+                className="d-block w-100"
+                src={movie.ImagePath}
+                alt={movie.title}
+              />
             </div>
             <div className="movie-title">
               <span className="label">
