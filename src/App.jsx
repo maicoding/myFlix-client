@@ -1,20 +1,42 @@
 import React, { useState } from "react";
-import { movies } from "./movies";
 import { readWatchlist, saveWatchlist } from "./storage";
+import { useFilmCatalogue } from "./hooks/useFilmCatalogue";
+import { filterFilms, savedLegacyFilms } from "./catalogue";
+import { FILM_API_HOME } from "./film-api";
 import { MovieRow } from "./components/MovieRow";
 import { MovieDialog } from "./components/MovieDialog";
-const genres = [...new Set(movies.map((m) => m.genre))].sort();
+
 export default function App() {
-  const [saved, setSaved] = useState(readWatchlist),
-    [query, setQuery] = useState(""),
-    [genre, setGenre] = useState("all"),
-    [view, setView] = useState("all"),
-    [sort, setSort] = useState("title"),
-    [selected, setSelected] = useState(null),
-    [notice, setNotice] = useState("");
+  const { films, loading, error, reload } = useFilmCatalogue();
+  const [saved, setSaved] = useState(readWatchlist);
+  const [query, setQuery] = useState("");
+  const [director, setDirector] = useState("all");
+  const [view, setView] = useState("all");
+  const [sort, setSort] = useState("title");
+  const [selected, setSelected] = useState(null);
+  const [notice, setNotice] = useState("");
+  const legacy = savedLegacyFilms(saved);
+  const allKnown = [...films, ...legacy];
+  const watchlist = allKnown.filter((movie) => saved.includes(movie.id));
+  const unresolved = saved.filter(
+    (id) => !allKnown.some((movie) => movie.id === id),
+  ).length;
+  const directors = [
+    ...new Set(allKnown.map((movie) => movie.director)),
+  ].sort();
+  const visible = filterFilms(view === "saved" ? watchlist : films, {
+    query,
+    director,
+    sort,
+  });
+  function reset() {
+    setQuery("");
+    setDirector("all");
+    setView("all");
+  }
   function toggle(id) {
     const next = saved.includes(id)
-      ? saved.filter((x) => x !== id)
+      ? saved.filter((value) => value !== id)
       : [...saved, id];
     setSaved(next);
     setNotice(
@@ -23,18 +45,6 @@ export default function App() {
         : "Browser storage is unavailable. Your watchlist will last until this page is closed.",
     );
   }
-  const visible = movies
-    .filter(
-      (m) =>
-        (view === "all" || saved.includes(m.id)) &&
-        (genre === "all" || m.genre === genre) &&
-        [m.title, m.director, String(m.year)].some((s) =>
-          s.toLowerCase().includes(query.trim().toLowerCase()),
-        ),
-    )
-    .sort((a, b) =>
-      sort === "year" ? a.year - b.year : a.title.localeCompare(b.title),
-    );
   return (
     <>
       <a className="skip" href="#main">
@@ -50,8 +60,18 @@ export default function App() {
         <main id="main">
           <section className="intro">
             <h1>Film collection.</h1>
-            <p>A small collection of cinema’s early experiments.</p>
+            <p>Studio Ghibli films, loaded from the community film API.</p>
           </section>
+          <div className="catalogue-source">
+            <p className="muted">
+              {loading
+                ? "Loading films…"
+                : `${films.length} films from the Studio Ghibli API`}
+            </p>
+            <button onClick={reload} disabled={loading}>
+              Refresh films
+            </button>
+          </div>
           <div className="toolbar">
             <label className="grow">
               Search films
@@ -59,19 +79,19 @@ export default function App() {
                 type="search"
                 placeholder="Title, director or year"
                 value={query}
-                onChange={(e) => setQuery(e.target.value)}
+                onChange={(event) => setQuery(event.target.value)}
               />
             </label>
             <label>
-              Genre
+              Director
               <select
-                aria-label="Genre"
-                value={genre}
-                onChange={(e) => setGenre(e.target.value)}
+                aria-label="Director"
+                value={director}
+                onChange={(event) => setDirector(event.target.value)}
               >
-                <option value="all">All genres</option>
-                {genres.map((g) => (
-                  <option key={g}>{g}</option>
+                <option value="all">All directors</option>
+                {directors.map((value) => (
+                  <option key={value}>{value}</option>
                 ))}
               </select>
             </label>
@@ -80,10 +100,11 @@ export default function App() {
               <select
                 aria-label="Sort by"
                 value={sort}
-                onChange={(e) => setSort(e.target.value)}
+                onChange={(event) => setSort(event.target.value)}
               >
                 <option value="title">Title A–Z</option>
                 <option value="year">Oldest first</option>
+                <option value="newest">Newest first</option>
               </select>
             </label>
           </div>
@@ -99,15 +120,40 @@ export default function App() {
                 aria-pressed={view === "saved"}
                 onClick={() => setView("saved")}
               >
-                Watchlist (
-                {saved.filter((id) => movies.some((m) => m.id === id)).length})
+                Watchlist ({saved.length})
               </button>
             </div>
             <span className="muted" aria-live="polite">
-              {visible.length} films
+              {loading && !films.length
+                ? "Loading…"
+                : `${visible.length} films`}
             </span>
           </div>
-          <ul className="film-list">
+          {loading ? (
+            <p role="status" className="loading-message">
+              {films.length
+                ? "Refreshing film data…"
+                : "Loading the film catalogue…"}
+            </p>
+          ) : null}
+          {error ? (
+            <div className="api-error" role="alert">
+              <h2>Film data is unavailable.</h2>
+              <p>{error}</p>
+              {films.length ? (
+                <p>The last successfully loaded films are still shown.</p>
+              ) : null}
+              <button onClick={reload}>Try again</button>
+            </div>
+          ) : null}
+          {view === "saved" && unresolved > 0 && !loading ? (
+            <p className="muted">
+              {unresolved} saved {unresolved === 1 ? "film is" : "films are"}{" "}
+              currently unavailable from this catalogue. Your saved entries have
+              been kept.
+            </p>
+          ) : null}
+          <ul className="film-list" aria-busy={loading}>
             {visible.map((movie) => (
               <MovieRow
                 key={movie.id}
@@ -118,19 +164,15 @@ export default function App() {
               />
             ))}
           </ul>
-          {!visible.length ? (
+          {!visible.length && !loading && !error ? (
             <div className="empty">
-              <h2>No films in this view.</h2>
+              <h2>
+                {view === "saved" && !saved.length
+                  ? "Your watchlist is empty."
+                  : "No films in this view."}
+              </h2>
               <p>Try another search or add a film to your watchlist.</p>
-              <button
-                onClick={() => {
-                  setQuery("");
-                  setGenre("all");
-                  setView("all");
-                }}
-              >
-                Show all films
-              </button>
+              <button onClick={reset}>Show all films</button>
             </div>
           ) : null}
           <p role="status" className="notice">
@@ -138,9 +180,14 @@ export default function App() {
           </p>
         </main>
         <footer>
-          Curated sample catalogue · No streaming or account connection.
+          Film data:{" "}
+          <a href={FILM_API_HOME} target="_blank" rel="noreferrer">
+            Studio Ghibli API
+          </a>{" "}
+          (community project). Posters are supplied by the API from TMDB.
           <br />
-          Your watchlist is saved on this device.
+          Your watchlist is saved on this device. Streaming and accounts are
+          unavailable.
         </footer>
       </div>
       <MovieDialog movie={selected} onClose={() => setSelected(null)} />

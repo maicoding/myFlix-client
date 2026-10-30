@@ -4,7 +4,7 @@ export function readWatchlist() {
       localStorage.getItem("myflix.watchlist.v1") || "[]",
     );
     return Array.isArray(value)
-      ? value.filter((id) => typeof id === "string")
+      ? [...new Set(value.filter((id) => typeof id === "string" && id.trim()))]
       : [];
   } catch {
     return [];

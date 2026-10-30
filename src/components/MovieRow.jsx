@@ -1,26 +1,18 @@
 import React from "react";
+import { MoviePoster } from "./MoviePoster";
 export function MovieRow({ movie, saved, onToggle, onDetails }) {
   return (
     <li className="film-row">
-      <div
-        className="poster"
-        style={{ "--poster": movie.color }}
-        aria-hidden="true"
-      >
-        <span>{movie.year}</span>
-        <span>
-          {movie.title
-            .split(" ")
-            .map((w) => w[0])
-            .slice(0, 3)
-            .join("")}
-        </span>
-      </div>
+      <MoviePoster movie={movie} />
       <div>
         <h2>{movie.title}</h2>
         <p>
-          {movie.year} · {movie.genre} · {movie.minutes} min
+          {movie.year ?? "Year unavailable"} · {movie.director}
+          {movie.minutes ? ` · ${movie.minutes} min` : ""}
         </p>
+        {movie.source === "legacy" ? (
+          <p className="legacy-note">Saved from the earlier demo catalogue</p>
+        ) : null}
         <p className="film-description">{movie.description}</p>
         <button
           className="text-button"

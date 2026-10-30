@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { readWatchlist, saveWatchlist } from "../src/storage.js";
 import { movies } from "../src/movies.js";
 test("watchlist survives a storage round trip and filters malformed values", () => {
-  let data = '["metropolis",1,null]';
+  let data = '["metropolis",1,null,"metropolis",""]';
   globalThis.localStorage = {
     getItem: () => data,
     setItem: (_key, value) => {
