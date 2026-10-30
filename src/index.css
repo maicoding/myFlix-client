@@ -321,7 +321,7 @@ a.skip {
   border-radius: 4px;
   overflow: hidden;
 }
-.poster span:last-child {
+.poster span:nth-child(2) {
   font-size: 2.2rem;
   letter-spacing: -0.06em;
 }
@@ -359,7 +359,7 @@ a.skip {
     height: 108px;
     padding: 8px;
   }
-  .poster span:last-child {
+  .poster span:nth-child(2) {
     font-size: 1.5rem;
   }
   .film-row .watch-button {
@@ -374,4 +374,61 @@ a.skip {
   }
 }
 
-@media (max-width: 600px) { .toolbar .grow { flex-basis: 100%; } }
+@media (max-width: 600px) {
+  .toolbar .grow {
+    flex-basis: 100%;
+  }
+}
+
+.catalogue-source {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+.catalogue-source p {
+  margin: 0;
+}
+.loading-message {
+  padding: 20px 0;
+  color: var(--muted);
+}
+.api-error {
+  padding: 20px;
+  border: 1px solid #e4a79a;
+  border-radius: 8px;
+  margin: 24px 0;
+}
+.api-error h2 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.poster {
+  position: relative;
+  height: 150px;
+}
+.poster img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.original-title {
+  font-size: 1.2rem;
+}
+.film-row .legacy-note {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+.film-row h2,
+dialog h2 {
+  overflow-wrap: anywhere;
+}
+@media (max-width: 600px) {
+  .poster {
+    height: 108px;
+  }
+}
